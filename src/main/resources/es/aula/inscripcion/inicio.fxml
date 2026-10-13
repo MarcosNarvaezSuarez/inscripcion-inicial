@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="375.0" prefWidth="500.0" spacing="12.0" 
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="12.0" 
 	xmlns="http://javafx.com/javafx/21" 
 	xmlns:fx="http://javafx.com/fxml/1" 
 	fx:controller="es.aula.inscripcion.InicioController">
@@ -16,24 +16,42 @@
         <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
     </padding>
     <children>
-      <BorderPane prefHeight="334.0" prefWidth="452.0">
+      <BorderPane VBox.vgrow="ALWAYS">
+         
          <top>
-              <Label text="Game-in" wrapText="true" BorderPane.alignment="CENTER">
+            <Label text="Game-in" wrapText="true" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="Comic Sans MS Italic" size="42.0" />
+                  <Font name="Comic Sans MS Italic" size="48.0" />
                </font>
+               <BorderPane.margin>
+                  <Insets top="20.0" />
+               </BorderPane.margin>
             </Label>
          </top>
+         
+         <center>
+            <!-- Aquí está el cambio: onAction="#irAInscripcion" -->
+            <Button fx:id="cambioInscripcion" mnemonicParsing="false" onAction="#irAInscripcion" text="Inscribirse" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </Button>
+         </center>
+         
          <bottom>
-            <Label prefHeight="27.0" prefWidth="427.0" text="Página web de inscripción en torneos de videojuegos" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Label text="Página web de inscripción en torneos de videojuegos" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
             </Label>
          </bottom>
-         <center>
-            <Button mnemonicParsing="false" text="Inscribirse" BorderPane.alignment="CENTER" fx:id="cambioInscripcion" onAction="#cambioInscripcion"/>
-         </center>
+         
       </BorderPane>
     </children>
 </VBox>

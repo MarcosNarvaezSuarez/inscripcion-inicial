@@ -18,7 +18,7 @@ public class InicioController {
     
 
     @FXML
-    private void cambioInscripcion() throws IOException {
+    private void irAInscripcion() throws IOException {
     	
     	cambioInscripcion.requestFocus();
     	Parent vista = FXMLLoader.load(getClass().getResource("inscripcion.fxml"));

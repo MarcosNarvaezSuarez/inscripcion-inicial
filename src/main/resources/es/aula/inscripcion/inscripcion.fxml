@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,73 +15,80 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController">
-    <children>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="180.0" layoutY="2.0" text="Menú de inscripción">
-               <font>
-                  <Font name="Comic Sans MS Italic" size="24.0" />
-               </font></Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="300.0" prefWidth="600.0">
-         <children>
-            <GridPane prefHeight="300.0" prefWidth="579.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.1999755859375" minWidth="10.0" prefWidth="279.1999755859375" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.4000244140625" minWidth="10.0" prefWidth="289.60002441406243" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Nombre del participante:" GridPane.rowIndex="2" />
-                  <Label text="Juego en el que inscribirse:" />
-                  <Label text="Fecha del torneo:" GridPane.rowIndex="4" />
-                  <TextField fx:id="nombreParticipante" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="juegosComboBox" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <DatePicker fx:id="fechaTorneo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Liga del torneo:" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="ligasComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Marque en caso de necesitar periféricos en el torneo" GridPane.rowIndex="5" />
-                  <CheckBox fx:id="perifericosCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextArea fx:id="observaciones" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Observaciones:" GridPane.rowIndex="3" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" right="10.0" top="10.0" />
-               </padding>
-            </GridPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="50.0" prefWidth="200.0">
-         <children>
-            <HBox prefHeight="110.0" prefWidth="579.0" spacing="5.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
-                  <Button fx:id="borrarButton" disable="true" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
-                  <Button fx:id="botonCambio" mnemonicParsing="false" onAction="#cambioInicio" text="Volver" />
-                  <Label text="Resultados:">
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </Label>
-                  <VBox fx:id="resultados" prefHeight="90.0" prefWidth="319.0" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-               </padding>
-            </HBox>
-         </children>
-      </AnchorPane>
-   </children>
+<!-- El VBox principal gestionará todo el espacio -->
+<VBox prefHeight="500.0" prefWidth="700.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController">
    <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
    </padding>
+   <children>
+      <!-- 1. TÍTULO -->
+      <Label maxWidth="Infinity" alignment="CENTER" text="Menú de inscripción">
+         <font>
+            <Font name="Comic Sans MS Italic" size="26.0" />
+         </font>
+      </Label>
+
+      <!-- 2. FORMULARIO: VBox.vgrow="ALWAYS" hace que el grid empuje lo demás si hay espacio vertical -->
+      <GridPane hgap="15.0" vgap="10.0" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+          <!-- Columna 1 (Textos): Se ajusta automáticamente al tamaño de las letras -->
+          <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+          <!-- Columna 2 (Inputs): hgrow="ALWAYS" hace que se estire al ensanchar la ventana -->
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <!-- La fila del TextArea tiene vgrow="ALWAYS" para que el cuadro de texto crezca hacia abajo -->
+          <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <Label text="Juego en el que inscribirse:" />
+            <Label text="Liga del torneo:" GridPane.rowIndex="1" />
+            <Label text="Nombre del participante:" GridPane.rowIndex="2" />
+            <Label text="Observaciones:" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Fecha del torneo:" GridPane.rowIndex="4" />
+            <Label text="Marque en caso de necesitar periféricos:" GridPane.rowIndex="5" />
+            
+            <!-- Usamos maxWidth="Infinity" para que los desplegables ocupen toda su columna -->
+            <ComboBox fx:id="juegosComboBox" maxWidth="Infinity" GridPane.columnIndex="1" />
+            <ComboBox fx:id="ligasComboBox" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="nombreParticipante" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="observaciones" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <DatePicker fx:id="fechaTorneo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            
+            <CheckBox fx:id="perifericosCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+
+      <!-- 3. BOTONES Y RESULTADOS -->
+      <HBox spacing="15.0">
+         <children>
+            <!-- Columna de Botones -->
+            <VBox spacing="10.0" HBox.hgrow="NEVER">
+               <children>
+                  <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
+                  <Button fx:id="borrarButton" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
+                  <Button fx:id="botonCambio" maxWidth="Infinity" mnemonicParsing="false" onAction="#cambioInicio" text="Volver" />
+               </children>
+            </VBox>
+            
+            <Label text="Resultados:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            
+            <!-- HBox.hgrow="ALWAYS" hace que la caja de resultados ocupe el resto del ancho de la pantalla -->
+            <VBox fx:id="resultados" style="-fx-border-color: lightgray; -fx-padding: 8; -fx-background-color: #f9f9f9;" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
 </VBox>
