@@ -30,7 +30,6 @@
          </top>
          
          <center>
-            <!-- Aquí está el cambio: onAction="#irAInscripcion" -->
             <Button fx:id="cambioInscripcion" mnemonicParsing="false" onAction="#irAInscripcion" text="Inscribirse" BorderPane.alignment="CENTER">
                <font>
                   <Font size="16.0" />
