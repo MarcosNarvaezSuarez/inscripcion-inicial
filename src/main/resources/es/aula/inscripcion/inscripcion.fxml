@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController">
+    <children>
+      <AnchorPane prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="180.0" layoutY="2.0" text="Menú de inscripción">
+               <font>
+                  <Font name="Comic Sans MS Italic" size="24.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="300.0" prefWidth="600.0">
+         <children>
+            <GridPane prefHeight="300.0" prefWidth="579.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.1999755859375" minWidth="10.0" prefWidth="279.1999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="318.4000244140625" minWidth="10.0" prefWidth="289.60002441406243" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Nombre del participante:" GridPane.rowIndex="2" />
+                  <Label text="Juego en el que inscribirse:" />
+                  <Label text="Fecha del torneo:" GridPane.rowIndex="4" />
+                  <TextField fx:id="nombreParticipante" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="juegosComboBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="fechaTorneo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Liga del torneo:" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="ligasComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Marque en caso de necesitar periféricos en el torneo" GridPane.rowIndex="5" />
+                  <CheckBox fx:id="perifericosCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextArea fx:id="observaciones" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Observaciones:" GridPane.rowIndex="3" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <HBox prefHeight="110.0" prefWidth="579.0" spacing="5.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
+                  <Button fx:id="borrarButton" disable="true" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
+                  <Button fx:id="botonCambio" mnemonicParsing="false" onAction="#cambioInicio" text="Volver" />
+                  <Label text="Resultados:">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Label>
+                  <VBox fx:id="resultados" prefHeight="90.0" prefWidth="319.0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

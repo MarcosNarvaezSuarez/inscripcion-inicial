@@ -49,10 +49,10 @@ utilizado en clase (en Eclipse: Team > Share Project > Git).
 Haz un primer commit de la plantilla y otro significativo al finalizar cada sesión.
 Entrega el proyecto sin la carpeta target. Completa este README con:
 
-- Nombre del alumno:
-- Temática elegida:
-- Funcionalidades realizadas y pendientes:
+- Nombre del alumno: Marcos Narváez Suárez
+- Temática elegida: Torneo de videojuegos individuales
+- Funcionalidades realizadas y pendientes: 
 - Comprobación por un compañero y mejora realizada:
-- Uso de IA, si lo ha habido:
+- Uso de IA, si lo ha habido: 
 
 Referencia de configuración: https://openjfx.io/openjfx-docs/

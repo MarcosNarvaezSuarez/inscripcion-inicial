@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER" spacing="12.0">
+<VBox alignment="CENTER" prefHeight="375.0" prefWidth="500.0" spacing="12.0" 
+	xmlns="http://javafx.com/javafx/21" 
+	xmlns:fx="http://javafx.com/fxml/1" 
+	fx:controller="es.aula.inscripcion.InicioController">
+	
     <padding>
-        <Insets top="24.0" right="24.0" bottom="24.0" left="24.0" />
+        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
     </padding>
     <children>
-        <Label text="Mi aplicación de inscripción" wrapText="true" />
+      <BorderPane prefHeight="334.0" prefWidth="452.0">
+         <top>
+              <Label text="Game-in" wrapText="true" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Comic Sans MS Italic" size="42.0" />
+               </font>
+            </Label>
+         </top>
+         <bottom>
+            <Label prefHeight="27.0" prefWidth="427.0" text="Página web de inscripción en torneos de videojuegos" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </bottom>
+         <center>
+            <Button mnemonicParsing="false" text="Inscribirse" BorderPane.alignment="CENTER" fx:id="cambioInscripcion" onAction="#cambioInscripcion"/>
+         </center>
+      </BorderPane>
     </children>
 </VBox>
