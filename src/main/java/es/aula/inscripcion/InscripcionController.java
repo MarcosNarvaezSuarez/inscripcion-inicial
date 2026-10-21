@@ -10,7 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox; // Importante añadir esta importación
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +28,9 @@ public class InscripcionController {
     private Button botonCambio;
     
     @FXML
+    private Button inscribirseButton;
+    
+    @FXML
     private ComboBox<String> juegosComboBox;
     
     @FXML
@@ -42,13 +45,11 @@ public class InscripcionController {
     @FXML
     private CheckBox perifericosCheckBox; 
     
-    // Añadimos la VBox que pusiste en el FXML
     @FXML
     private VBox resultados;
     
     @FXML
     private void borrar() {
-        // Limpiamos todos los campos
         nombreParticipante.clear();
         observaciones.clear();
         juegosComboBox.getSelectionModel().clearSelection();
@@ -56,9 +57,7 @@ public class InscripcionController {
         fechaTorneo.setValue(null);
         perifericosCheckBox.setSelected(false);
         
-        // Limpiamos los resultados mostrados en pantalla
         resultados.getChildren().clear();
-        
         borrarButton.setDisable(true);
     }
     
@@ -75,7 +74,6 @@ public class InscripcionController {
         juegosComboBox.getItems().addAll("Valorant", "League of Legends", "CS:GO", "Deadlock");
         ligasComboBox.getItems().addAll("Nivel profesional", "Nivel medio", "Nivel bajo");
         
-        // Habilitar el botón de borrar solo si se escribe algo en el nombre
         nombreParticipante.textProperty().addListener((observable, oldValue, newValue) -> {
             borrarButton.setDisable(newValue.trim().isEmpty());
         });
@@ -88,34 +86,35 @@ public class InscripcionController {
         String ligaSeleccionada = ligasComboBox.getValue();
         LocalDate fecha = fechaTorneo.getValue();
         boolean necesitaPerifericos = perifericosCheckBox.isSelected();
+        String textoObservaciones = observaciones.getText();
         
-        // Limpiamos los resultados anteriores antes de mostrar los nuevos
         resultados.getChildren().clear();
         
         if (nombre == null || nombre.trim().isEmpty()) {
             Label errorLabel = new Label("Error: El nombre es obligatorio.");
-            errorLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+            errorLabel.setStyle("-fx-text-fill: #f44336; -fx-font-weight: bold;");
             resultados.getChildren().add(errorLabel);
             return; 
         }
 
-        // Preparamos el texto a mostrar manejando posibles valores nulos
         String infoJuego = juegoSeleccionado != null ? juegoSeleccionado : "Ninguno";
         String infoLiga = ligaSeleccionada != null ? ligaSeleccionada : "Ninguna";
         String infoFecha = fecha != null ? fecha.toString() : "Sin fecha";
         String infoPerifericos = necesitaPerifericos ? "Sí" : "No";
+        String infoObservaciones = (textoObservaciones == null || textoObservaciones.trim().isEmpty()) ? "Ninguna" : textoObservaciones;
 
-        // Creamos Labels con la información
         Label linea1 = new Label("Nombre: " + nombre + " | Juego: " + infoJuego);
         Label linea2 = new Label("Liga: " + infoLiga + " | Fecha: " + infoFecha);
         Label linea3 = new Label("Necesita periféricos: " + infoPerifericos);
         
-        // Aplicamos un poco de estilo para que se vea mejor (opcional)
+        Label linea4 = new Label("Observaciones: " + infoObservaciones);
+        linea4.setWrapText(true);
+        
         linea1.setStyle("-fx-text-fill: #333333;");
         linea2.setStyle("-fx-text-fill: #333333;");
         linea3.setStyle("-fx-text-fill: #333333;");
+        linea4.setStyle("-fx-text-fill: #555555; -fx-font-style: italic;");
 
-        // Añadimos los Labels creados dentro de la VBox
-        resultados.getChildren().addAll(linea1, linea2, linea3);
+        resultados.getChildren().addAll(linea1, linea2, linea3, linea4);
     }
 }

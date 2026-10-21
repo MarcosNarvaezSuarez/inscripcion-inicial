@@ -16,7 +16,9 @@
 <?import javafx.scene.text.Font?>
 
 <!-- El VBox principal gestionará todo el espacio -->
-<VBox prefHeight="500.0" prefWidth="700.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController">
+<VBox prefHeight="500.0" prefWidth="700.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" 
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController" 
+	stylesheets="@inscripcion.css">
    <padding>
       <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
    </padding>
@@ -74,7 +76,7 @@
             <!-- Columna de Botones -->
             <VBox spacing="10.0" HBox.hgrow="NEVER">
                <children>
-                  <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
+                  <Button fx:id="inscribirseButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
                   <Button fx:id="borrarButton" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
                   <Button fx:id="botonCambio" maxWidth="Infinity" mnemonicParsing="false" onAction="#cambioInicio" text="Volver" />
                </children>

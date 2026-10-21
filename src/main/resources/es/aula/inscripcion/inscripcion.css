@@ -1,0 +1,57 @@
+/* Estilos generales de la ventana */
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-background-color: #ffffff;
+}
+
+/* Estilos para los textos (Labels) */
+.label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+/* Estilos base para todos los botones */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 15px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+/* Botón Inscribirse (Verde) */
+#inscribirseButton {
+    -fx-background-color: #03c700;
+    -fx-text-fill: white;
+}
+
+#inscribirseButton:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Botón Borrar (Rojo) */
+#borrarButton {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+}
+
+#borrarButton:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* Estado deshabilitado del botón Borrar */
+#borrarButton:disabled {
+    -fx-background-color: #ff5959;
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 0.8;
+}
+
+/* Botón Volver (Gris) */
+#botonCambio {
+    -fx-background-color: #858585;
+    -fx-text-fill: white;
+}
+
+#botonCambio:hover {
+    -fx-background-color: #757575;
+}
