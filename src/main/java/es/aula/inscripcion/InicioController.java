@@ -16,10 +16,10 @@ public class InicioController {
     
 
     @FXML
-    private void irAInscripcion() throws IOException {
+    private void irALista() throws IOException {
     	
     	cambioInscripcion.requestFocus();
-    	Parent vista = FXMLLoader.load(getClass().getResource("inscripcion.fxml"));
+    	Parent vista = FXMLLoader.load(getClass().getResource("lista.fxml"));
     	Stage stage = (Stage) cambioInscripcion.getScene().getWindow();
     	stage.getScene().setRoot(vista);
     	

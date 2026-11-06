@@ -30,7 +30,7 @@
          </top>
          
          <center>
-            <Button fx:id="cambioInscripcion" mnemonicParsing="false" onAction="#irAInscripcion" text="Inscribirse" BorderPane.alignment="CENTER">
+            <Button fx:id="cambioInscripcion" mnemonicParsing="false" onAction="#irALista" text="Inscribirse" BorderPane.alignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>

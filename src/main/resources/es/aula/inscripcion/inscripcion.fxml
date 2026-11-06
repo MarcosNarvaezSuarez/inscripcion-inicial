@@ -16,15 +16,14 @@
 <?import javafx.scene.text.Font?>
 
 <!-- El VBox principal gestionará todo el espacio -->
-<VBox prefHeight="500.0" prefWidth="700.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" 
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController" 
-	stylesheets="@inscripcion.css">
+
+<VBox prefHeight="500.0" prefWidth="700.0" spacing="15.0" stylesheets="@inscripcion.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.InscripcionController">
    <padding>
       <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
    </padding>
    <children>
       <!-- 1. TÍTULO -->
-      <Label maxWidth="Infinity" alignment="CENTER" text="Menú de inscripción">
+      <Label alignment="CENTER" maxWidth="Infinity" text="Menú de inscripción">
          <font>
             <Font name="Comic Sans MS Italic" size="26.0" />
          </font>
@@ -43,30 +42,33 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
           <!-- La fila del TextArea tiene vgrow="ALWAYS" para que el cuadro de texto crezca hacia abajo -->
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
           <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="ALWAYS" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
         </rowConstraints>
          <children>
             <Label text="Juego en el que inscribirse:" />
             <Label text="Liga del torneo:" GridPane.rowIndex="1" />
-            <Label text="Nombre del participante:" GridPane.rowIndex="2" />
-            <Label text="Observaciones:" GridPane.rowIndex="3" GridPane.valignment="TOP">
+            <Label text="Nombre del participante:" GridPane.rowIndex="3" />
+            <Label text="Observaciones:" GridPane.rowIndex="4" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets top="5.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Fecha del torneo:" GridPane.rowIndex="4" />
-            <Label text="Marque en caso de necesitar periféricos:" GridPane.rowIndex="5" />
+            <Label text="Fecha del torneo:" GridPane.rowIndex="5" />
+            <Label text="Marque en caso de necesitar periféricos:" GridPane.rowIndex="6" />
             
             <!-- Usamos maxWidth="Infinity" para que los desplegables ocupen toda su columna -->
             <ComboBox fx:id="juegosComboBox" maxWidth="Infinity" GridPane.columnIndex="1" />
             <ComboBox fx:id="ligasComboBox" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="nombreParticipante" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextArea fx:id="observaciones" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <DatePicker fx:id="fechaTorneo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="nombreParticipante" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextArea fx:id="observaciones" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="fechaTorneo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             
-            <CheckBox fx:id="perifericosCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <CheckBox fx:id="perifericosCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label text="Equipo:" GridPane.rowIndex="2" />
+            <ComboBox fx:id="equiposComboBox" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
 
@@ -78,7 +80,7 @@
                <children>
                   <Button fx:id="inscribirseButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
                   <Button fx:id="borrarButton" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
-                  <Button fx:id="botonCambio" maxWidth="Infinity" mnemonicParsing="false" onAction="#cambioInicio" text="Volver" />
+                  <Button fx:id="botonCambio" maxWidth="Infinity" mnemonicParsing="false" onAction="#cambioLista" text="Volver" />
                </children>
             </VBox>
             

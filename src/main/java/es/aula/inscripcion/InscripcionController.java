@@ -37,6 +37,9 @@ public class InscripcionController {
     private ComboBox<String> ligasComboBox;
     
     @FXML
+    private ComboBox<String> equiposComboBox;
+    
+    @FXML
     private DatePicker fechaTorneo; 
     
     @FXML
@@ -62,9 +65,9 @@ public class InscripcionController {
     }
     
     @FXML
-    private void cambioInicio() throws IOException {
+    private void cambioLista() throws IOException {
         botonCambio.requestFocus();
-        Parent vista = FXMLLoader.load(getClass().getResource("inicio.fxml"));
+        Parent vista = FXMLLoader.load(getClass().getResource("lista.fxml"));
         Stage stage = (Stage) botonCambio.getScene().getWindow();
         stage.getScene().setRoot(vista);
     }
@@ -73,6 +76,8 @@ public class InscripcionController {
     public void initialize() {
         juegosComboBox.getItems().addAll("Valorant", "League of Legends", "CS:GO", "Deadlock");
         ligasComboBox.getItems().addAll("Nivel profesional", "Nivel medio", "Nivel bajo");
+        equiposComboBox.getItems().addAll("NaVi", "T1", "G2", "MKOI", "GENG","IG");
+        
         
         nombreParticipante.textProperty().addListener((observable, oldValue, newValue) -> {
             borrarButton.setDisable(newValue.trim().isEmpty());
@@ -87,6 +92,7 @@ public class InscripcionController {
         LocalDate fecha = fechaTorneo.getValue();
         boolean necesitaPerifericos = perifericosCheckBox.isSelected();
         String textoObservaciones = observaciones.getText();
+        String equipoSeleccionado = equiposComboBox.getValue();
         
         resultados.getChildren().clear();
         
@@ -102,10 +108,11 @@ public class InscripcionController {
         String infoFecha = fecha != null ? fecha.toString() : "Sin fecha";
         String infoPerifericos = necesitaPerifericos ? "Sí" : "No";
         String infoObservaciones = (textoObservaciones == null || textoObservaciones.trim().isEmpty()) ? "Ninguna" : textoObservaciones;
+        String infoEquipo= equipoSeleccionado !=null ? equipoSeleccionado : "Ninguno";
 
         Label linea1 = new Label("Nombre: " + nombre + " | Juego: " + infoJuego);
         Label linea2 = new Label("Liga: " + infoLiga + " | Fecha: " + infoFecha);
-        Label linea3 = new Label("Necesita periféricos: " + infoPerifericos);
+        Label linea3 = new Label("Necesita periféricos: " + infoPerifericos + " | Equipo: " + equipoSeleccionado);
         
         Label linea4 = new Label("Observaciones: " + infoObservaciones);
         linea4.setWrapText(true);
