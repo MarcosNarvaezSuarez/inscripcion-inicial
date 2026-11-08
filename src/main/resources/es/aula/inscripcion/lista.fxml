@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="850.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.ListaController">
+<VBox prefHeight="600.0" prefWidth="850.0" spacing="10.0" stylesheets="@lista.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.aula.inscripcion.ListaController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -22,10 +22,8 @@
          </font>
       </Label>
       
-      <!-- HBox para la Tabla principal y el ListView lateral -->
       <HBox spacing="15.0" VBox.vgrow="ALWAYS">
          <children>
-            <!-- Tabla Principal con CONSTRAINED_RESIZE_POLICY para eliminar las columnas vacías a la derecha -->
             <TableView fx:id="tablaInscripciones" HBox.hgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="colNombre" prefWidth="100.0" text="Nombre" />
@@ -41,7 +39,6 @@
                </columnResizePolicy>
             </TableView>
             
-            <!-- ListView lateral para filtrar por juego (Mejora +0.5) -->
             <VBox prefWidth="150.0" spacing="5.0" HBox.hgrow="NEVER">
                <children>
                   <Label text="Filtrar por Juego:" />
@@ -52,15 +49,15 @@
          </children>
       </HBox>
       
-      <!-- Panel Inferior: Distribución adaptada al boceto amarillo -->
       <HBox spacing="20.0" VBox.vgrow="NEVER">
          <children>
-            <!-- Columna Izquierda: Botones y Contador -->
-            <VBox minWidth="160.0" spacing="10.0" HBox.hgrow="NEVER">
+            <VBox minWidth="175.0" spacing="10.0" HBox.hgrow="NEVER">
                <children>
-                  <Button fx:id="btnNueva" maxWidth="Infinity" mnemonicParsing="false" onAction="#irAInscripcion" style="-fx-background-color: #03c700; -fx-text-fill: white; -fx-font-weight: bold;" text="Nueva Inscripción" />
-                  <Button fx:id="btnBorrar" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#borrarInscripcion" style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-font-weight: bold;" text="Borrar Inscripción" />
-                  <Button fx:id="btnVolver" maxWidth="Infinity" mnemonicParsing="false" onAction="#volverInicio" style="-fx-background-color: #e0e0e0;" text="Volver" />
+                  <Button fx:id="btnNueva" maxWidth="Infinity" mnemonicParsing="false" onAction="#irAInscripcion" text="Nueva Inscripción" />
+                  <Button fx:id="btnBorrar" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#borrarInscripcion" text="Borrar Inscripción" />
+                  <!-- Nuevo botón de recuperación -->
+                  <Button fx:id="btnRecuperar" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#recuperarInscripcion" text="Deshacer Eliminación" />
+                  <Button fx:id="btnVolver" maxWidth="Infinity" mnemonicParsing="false" onAction="#volverInicio" text="Volver" />
                   <Label fx:id="lblContador" text="Número de registros: 0">
                      <font>
                         <Font size="14.0" />
@@ -72,7 +69,6 @@
                </children>
             </VBox>
             
-            <!-- Columna Derecha: Detalles del objeto seleccionado -->
             <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Detalles de inscripción:">
@@ -80,7 +76,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtDetalles" editable="false" prefHeight="130.0" style="-fx-control-inner-background: #fff2cc;" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <TextArea fx:id="txtDetalles" editable="false" prefHeight="150.0" wrapText="true" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>

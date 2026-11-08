@@ -53,6 +53,6 @@ Entrega el proyecto sin la carpeta target. Completa este README con:
 - Temática elegida: Torneo de videojuegos individuales
 - Funcionalidades realizadas y pendientes: 
 - Comprobación por un compañero y mejora realizada: 
-- Uso de IA, si lo ha habido: Consulta de funciones, resolución de errores y optimización en cambios en el código
+- Uso de IA, si lo ha habido: Consulta de funciones, resolución de errores, optimización en cambios en el código y paso a txt de los bocetos.
 
 Referencia de configuración: https://openjfx.io/openjfx-docs/

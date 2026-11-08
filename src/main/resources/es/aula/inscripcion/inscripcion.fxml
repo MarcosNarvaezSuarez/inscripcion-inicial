@@ -78,6 +78,12 @@
             <!-- Columna de Botones -->
             <VBox spacing="10.0" HBox.hgrow="NEVER">
                <children>
+               <!-- VISTA PREVIA (Binding) -->
+			      <Label fx:id="lblVistaPrevia" text="Rellene los datos para la vista previa" style="-fx-font-style: italic; -fx-text-fill: #555555;">
+			         <font>
+			            <Font size="14.0" />
+			         </font>
+			      </Label>
                   <Button fx:id="inscribirseButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#guardarInscripcion" text="Inscribirse" />
                   <Button fx:id="borrarButton" disable="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
                   <Button fx:id="botonCambio" maxWidth="Infinity" mnemonicParsing="false" onAction="#cambioLista" text="Volver" />

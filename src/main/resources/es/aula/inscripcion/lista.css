@@ -1,0 +1,66 @@
+/* Fondo y tipografía general */
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-background-color: #f4f6f8;
+}
+
+/* Estilos comunes para todos los botones */
+.button {
+    -fx-font-size: 14px;
+    -fx-padding: 10px 15px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+/* Botón Nueva Inscripción (Verde) */
+#btnNueva {
+    -fx-background-color: #03c700;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+#btnNueva:hover {
+    -fx-background-color: #029900;
+}
+
+/* Botón Borrar (Rojo) */
+#btnBorrar {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+#btnBorrar:hover {
+    -fx-background-color: #cc0000;
+}
+#btnBorrar:disabled {
+    -fx-background-color: #ff8080;
+    -fx-opacity: 0.8;
+}
+
+/* Botón Recuperar (Naranja/Amarillo) */
+#btnRecuperar {
+    -fx-background-color: #ff9800;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+#btnRecuperar:hover {
+    -fx-background-color: #e68a00;
+}
+#btnRecuperar:disabled {
+    -fx-background-color: #ffcc80;
+    -fx-opacity: 0.8;
+}
+
+/* Botón Volver (Gris) */
+#btnVolver {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333333;
+}
+#btnVolver:hover {
+    -fx-background-color: #cccccc;
+}
+
+/* Panel de detalles */
+#txtDetalles {
+    -fx-control-inner-background: white;
+    -fx-font-size: 13px;
+}

@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.beans.binding.Bindings;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -52,6 +53,9 @@ public class InscripcionController {
     private VBox resultados;
     
     @FXML
+    private Label lblVistaPrevia;
+    
+    @FXML
     private void borrar() {
         nombreParticipante.clear();
         observaciones.clear();
@@ -78,31 +82,88 @@ public class InscripcionController {
         ligasComboBox.getItems().addAll("Nivel profesional", "Nivel medio", "Nivel bajo");
         equiposComboBox.getItems().addAll("NaVi", "T1", "G2", "MKOI", "GENG","IG");
         
-        
         nombreParticipante.textProperty().addListener((observable, oldValue, newValue) -> {
             borrarButton.setDisable(newValue.trim().isEmpty());
         });
+        
+        lblVistaPrevia.textProperty().bind(
+            Bindings.when(nombreParticipante.textProperty().isEmpty().or(juegosComboBox.valueProperty().isNull()))
+                    .then("Rellene nombre y juego para ver la vista previa")
+                    .otherwise(Bindings.concat("Inscribiendo a: ", nombreParticipante.textProperty(), " en el torneo de ", juegosComboBox.valueProperty()))
+        );
+    }
+    
+    private void mostrarError(String mensaje) {
+        // 1. Creamos la etiqueta con el mensaje que nos pasen entre los paréntesis
+        Label etiquetaError = new Label(mensaje);
+        
+        // 2. Le damos estilo para que se vea rojo y en negrita
+        etiquetaError.setStyle("-fx-text-fill: #f44336; -fx-font-weight: bold;");
+        
+        // 3. Lo añadimos a la caja de resultados de la pantalla
+        resultados.getChildren().add(etiquetaError);
     }
     
     @FXML
-    private void guardarInscripcion() {
+    private void guardarInscripcion() throws IOException { // <-- ¡Añade throws IOException porque luego cambiaremos de pantalla!
         String nombre = nombreParticipante.getText();
         String juegoSeleccionado = juegosComboBox.getValue();
         String ligaSeleccionada = ligasComboBox.getValue();
+        String equipoSeleccionado = equiposComboBox.getValue();
         LocalDate fecha = fechaTorneo.getValue();
         boolean necesitaPerifericos = perifericosCheckBox.isSelected();
         String textoObservaciones = observaciones.getText();
-        String equipoSeleccionado = equiposComboBox.getValue();
         
         resultados.getChildren().clear();
         
+        // 1. Validar nombre
         if (nombre == null || nombre.trim().isEmpty()) {
-            Label errorLabel = new Label("Error: El nombre es obligatorio.");
-            errorLabel.setStyle("-fx-text-fill: #f44336; -fx-font-weight: bold;");
-            resultados.getChildren().add(errorLabel);
-            return; 
+            mostrarError("Error: El nombre es obligatorio.");
+            nombreParticipante.requestFocus(); // Lleva el ratón allí
+            return; // Detiene la ejecución
         }
 
+        // 2. Validar que se ha elegido un juego
+        if (juegoSeleccionado == null) {
+            mostrarError("Error: Debes seleccionar un juego.");
+            juegosComboBox.requestFocus();
+            return;
+        }
+        
+        // 3. Validar que se ha elegido liga
+        if (ligaSeleccionada == null) {
+            mostrarError("Error: Debes seleccionar una liga.");
+            ligasComboBox.requestFocus();
+            return;
+        }
+
+        // 4. Validar que se ha elegido equipo
+        if (equipoSeleccionado == null) {
+            mostrarError("Error: Debes seleccionar un equipo.");
+            equiposComboBox.requestFocus();
+            return;
+        }
+        
+        if (fecha == null) {
+        	mostrarError("Error: La fecha no puede ser de una fecha pasada.");
+        	fechaTorneo.requestFocus();
+        	return;
+        }
+
+     // Si llegamos hasta aquí, no hay errores. Creamos el competidor:
+        Competidor nuevoCompetidor = new Competidor(
+            nombre, juegoSeleccionado, ligaSeleccionada, equipoSeleccionado, 
+            fecha, necesitaPerifericos, textoObservaciones
+        );
+
+        // Lo añadimos a la lista que sobrevive en memoria:
+        GestorDatos.getCompetidores().add(nuevoCompetidor);
+
+        // Y por último, volvemos a la pantalla de la tabla:
+        cambioLista();
+        
+        
+        //Sección de resumen de la inscripción
         String infoJuego = juegoSeleccionado != null ? juegoSeleccionado : "Ninguno";
         String infoLiga = ligaSeleccionada != null ? ligaSeleccionada : "Ninguna";
         String infoFecha = fecha != null ? fecha.toString() : "Sin fecha";

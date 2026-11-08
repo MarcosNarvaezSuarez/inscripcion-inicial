@@ -1,6 +1,8 @@
 package es.aula.inscripcion;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,23 +21,30 @@ public class ListaController {
     @FXML private TableColumn<Competidor, Boolean> colPerifericos;
 
     @FXML private ListView<String> listaJuegos;
-    @FXML private Button btnNueva, btnBorrar, btnVolver;
+    @FXML private Button btnNueva, btnBorrar, btnRecuperar, btnVolver;
     @FXML private Label lblContador;
     @FXML private TextArea txtDetalles;
 
     private FilteredList<Competidor> listaFiltrada;
+    
+    // Propiedad para guardar la última inscripción borrada
+    private final ObjectProperty<Competidor> ultimoEliminado = new SimpleObjectProperty<>(null);
 
     @FXML
     public void initialize() {
-        // 1. Configurar las columnas
-        colNombre.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
-        colJuego.setCellValueFactory(cellData -> cellData.getValue().juegoProperty());
-        colLiga.setCellValueFactory(cellData -> cellData.getValue().ligaProperty());
-        colEquipo.setCellValueFactory(cellData -> cellData.getValue().equipoProperty());
-        colFecha.setCellValueFactory(cellData -> cellData.getValue().fechaProperty());
-        colObservaciones.setCellValueFactory(cellData -> cellData.getValue().observacionesProperty());
+
         
-        colPerifericos.setCellValueFactory(cellData -> cellData.getValue().necesitaPerifericosProperty());
+        colNombre.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
+        
+        
+        colJuego.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getJuego()));
+        colLiga.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getLiga()));
+        colEquipo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEquipo()));
+        colFecha.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getFecha()));
+        colObservaciones.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getObservaciones()));
+        
+        
+        colPerifericos.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().isNecesitaPerifericos()));
         colPerifericos.setCellFactory(col -> new TableCell<>() {
             @Override
             protected void updateItem(Boolean item, boolean empty) {
@@ -44,19 +53,14 @@ public class ListaController {
             }
         });
 
-        // 2. Cargar datos desde el gestor en memoria
         listaFiltrada = new FilteredList<>(GestorDatos.getCompetidores(), p -> true);
         tablaInscripciones.setItems(listaFiltrada);
 
-        // 3. Listener para actualizar el panel de Detalles al seleccionar una fila
         txtDetalles.setText("No hay ninguna inscripción seleccionada.");
         tablaInscripciones.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 String detalles = String.format("• Nombre: %s\n• Juego: %s\n• Liga: %s\n• Equipo: %s\n• Fecha del torneo: %s\n• Necesita periféricos: %s\n\n• Observaciones:\n%s",
-                        newVal.getNombre(),
-                        newVal.getJuego(),
-                        newVal.getLiga(),
-                        newVal.getEquipo(),
+                        newVal.getNombre(), newVal.getJuego(), newVal.getLiga(), newVal.getEquipo(),
                         newVal.getFecha() != null ? newVal.getFecha().toString() : "Sin fecha",
                         newVal.isNecesitaPerifericos() ? "Sí" : "No",
                         (newVal.getObservaciones() != null && !newVal.getObservaciones().isEmpty()) ? newVal.getObservaciones() : "Ninguna observación.");
@@ -66,7 +70,6 @@ public class ListaController {
             }
         });
 
-        // 4. Configurar filtro ListView lateral
         listaJuegos.getItems().addAll("Valorant", "League of Legends", "CS:GO", "Deadlock");
         listaJuegos.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
@@ -74,9 +77,12 @@ public class ListaController {
             }
         });
 
-        // 5. Data Bindings
+        // Bindings
         lblContador.textProperty().bind(Bindings.concat("Número de registros: ", Bindings.size(GestorDatos.getCompetidores())));
         btnBorrar.disableProperty().bind(tablaInscripciones.getSelectionModel().selectedItemProperty().isNull());
+        
+        // El botón recuperar está deshabilitado si ultimoEliminado es nulo
+        btnRecuperar.disableProperty().bind(ultimoEliminado.isNull());
     }
 
     @FXML
@@ -89,8 +95,22 @@ public class ListaController {
     private void borrarInscripcion() {
         Competidor seleccionado = tablaInscripciones.getSelectionModel().getSelectedItem();
         if (seleccionado != null) {
+            // Guardamos el objeto antes de borrarlo
+            ultimoEliminado.set(seleccionado);
             GestorDatos.getCompetidores().remove(seleccionado); 
-            // La tabla y el panel de detalles se actualizan solos gracias al binding y al listener
+        }
+    }
+
+    @FXML
+    private void recuperarInscripcion() {
+        Competidor recuperado = ultimoEliminado.get();
+        if (recuperado != null) {
+            // Lo añadimos de vuelta a la colección
+            GestorDatos.getCompetidores().add(recuperado);
+            // Vaciamos la variable de recuperación (deshabilita el botón automáticamente)
+            ultimoEliminado.set(null);
+            // Seleccionamos el objeto recién recuperado en la tabla
+            tablaInscripciones.getSelectionModel().select(recuperado);
         }
     }
 
